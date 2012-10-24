@@ -4,7 +4,7 @@ CFLAGS=-O -g
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-all: encbc decbc testbc bclib
+all: encbc decbc testbc
 
 test: encbc decbc testbc
 	./testbc

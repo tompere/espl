@@ -10,7 +10,7 @@
     // 1. build our working arrays
     int input[BC_WIDTH] = {0};
     int charsArray[BC_WIDTH][BC_NBITS] = {0};
-    
+
     int index = 0;
     for(i=1; i!=argc; ++i) {
       // for each word
