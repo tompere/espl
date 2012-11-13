@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 #include "diff.h"
@@ -34,20 +35,21 @@ int main(int argc, char *argv[ ]) {
    char diffLine[300];
    
    difference = fopen(argv[optind+1], "r");
-   
+   struct diff theDiff;
+	 
    while(fgets(diffLine,sizeof(diffLine),difference) != NULL)
    {      
      // get difference (per line) 
-      struct diff theDiff;
+
       parsediff(diffLine, &theDiff);
       
       // open input file again
       toPrint = fopen(argv[optind], "rb+");
       
       // read bytes from file (stream) - 4 bytes per iteration, and XOR it with results (accumelator)
-      fseek(toPrint,theDiff.offset,SEEK_SET);
+      fseek(toPrint,theDiff.offset, SEEK_SET);
       
-      // deal with reverse (if needed)
+      // in case no reverse
       
       if ( revDiff == 0 ) {
 	if ( (char)getc(toPrint) == theDiff.old ) {
@@ -56,6 +58,9 @@ int main(int argc, char *argv[ ]) {
 	  if (printMsg == 1) {printf("A change was applied: %s\n",diffLine);}
 	}	
       }
+      
+      // in case reverse was needed
+      
       else{
 	if ( (char)getc(toPrint) == theDiff.new ) {
 	  fseek(toPrint,theDiff.offset,SEEK_SET);
@@ -63,15 +68,12 @@ int main(int argc, char *argv[ ]) {
 	  if (printMsg == 1) {printf("A change was applied (reverse): %s\n",diffLine);}
 	}	
       }
-      
+       
+      fclose(toPrint);
+
     }
     
-      fclose(toPrint);
+     fclose(difference);
+     return 0;
       
    }
-   
-   fclose(difference);
-   
-   return 0;
-   
-}
