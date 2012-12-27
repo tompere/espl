@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# create copy
+from="$(($2))"
+echo "$from"
+
+if [ ! -e $1 ] ; then
+  echo "ERROR: file $1 does not exist. bitch."
+  exit 1
+fi
+
+cp $1 tom1
+
+while [ "$from" != 0 ] ; do
+  # echo $i
+  if [ ! -e $1 ] ; then
+    cp $1 $1$from
+  fi
+  
+  
+  
+  cp $1 $1$i
+  i="$(( $i + 1 ))"
+
+done

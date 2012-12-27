@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# bkup - 
+
+# create copy
+i=0
+while [ $i <= $2  ] ; do
+  cp $1 $1.$i
+  i = "$( $i + 1 )"
+done
