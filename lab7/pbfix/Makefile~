@@ -7,7 +7,7 @@ CFLAGS=-O -g
 all: pbfix diff
 
 
-pbfix: bfix.o diff.o
+pbfix: pbfix.o diff.o
 	$(CC) $(CFLAGS) -o $@ $^
 
 diff: diff.o
@@ -16,4 +16,4 @@ pbfix.o: pbfix.c diff.h
 diff.o: diff.c diff.h
 
 clean:
-	rm -f *.o bcmp bfix diff
+	rm -f *.o pbfix diff
