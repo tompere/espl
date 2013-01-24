@@ -1,8 +1,0 @@
-#include "bclib.h"
-
-int main() {
-	bc_test();
-	return 0;
-}
-#endif
- 

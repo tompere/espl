@@ -1,0 +1,100 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+
+    <script>
+      function validateForm(e){
+	      
+		if (e.keyCode>47 && e.keyCode<58){
+		  e.returnvalue =false;
+		  alert("the user name must characters only");
+		  return false;
+		}
+		
+	var str=document.forms["input"]["user"].value;
+	return(showHint(str))
+      }
+
+      function validSubmit(event){
+      	var p=document.forms["input"]["pswd"].value;
+      	var x=document.forms["input"]["user"].value;
+	if( x.length ==0 || p.length ==0){
+	  alert("both fields must be filled");
+	event.returnValue=false;
+	  return false;
+	}
+	if (p.length < 5){ 
+	    alert("the pswd should be longer than 4");
+	event.returnValue=false;
+	    return false;
+	}
+	if (p.length > 0){ 
+	  var first = p[0];
+	  if (isNaN(first)== false){
+	    alert("the first note of the pswd should be a letter");
+	event.returnValue=false;
+	    return false;
+	   }
+	}
+	document.getElementById("suggestion").innerHTML="<b> you are logged in as "+ x +"</b>";
+	
+    }
+function showHint(str){
+varxmlhttp;
+if (str.length==0){
+document.getElementById("txtHint").innerHTML="";
+return;
+}
+if (window.XMLHttpRequest){// IE7+,Firefox,Chrome,Opera, Safari
+xmlhttp=new XMLHttpRequest();
+}
+else{// code for IE6, IE5
+xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+}
+xmlhttp.onreadystatechange=function(){
+if (xmlhttp.readyState==4 &&xmlhttp.status==200){
+document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+}
+}
+xmlhttp.open("GET","datalab12.php?q="+str,true);
+xmlhttp.send();
+}
+
+     </script>
+</head>
+  <body>
+
+	      <div class="the_form" align="right">
+		<form name="input"  method="get">
+		    Username: <input type="text" name="user" onkeypress="return validateForm(event)">
+		    &nbsp;&nbsp;
+		    Pasword: <input type="password" name="pswd">
+		    <input onclick="return validSubmit(event)" type="submit" value="Submit" >
+		</form>
+		<p id ="suggestion"> suggestion: <p>
+		<p id ="txtHint"> <br><p>
+	      </div>
+		
+		<hr>
+
+		<div class="links">
+		<a id ="ref" href="http://www.cs.bgu.ac.il/~eransing/step1.html">My Name</a><br>
+		</div>
+		
+		<div class="images" align="right">
+		<img border="0" id="pic" src="people.jpg" alt="Pulpit rock" width="104" height="178">
+		</div>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;add text about your self<p>
+		<hr>
+		<div id="footer" class="p2">
+			pass your mouse over the<br>picture and get amazed
+		</div>
+		<br>
+
+		<div id="vanishpicture" align="center">
+	      <img id="vanishpic" class="vanish" border="0" src="people.jpg" width="104" height="178">
+	      </div>
+
+
+	</body>
+</html>

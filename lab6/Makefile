@@ -13,7 +13,7 @@ LDFLAGS=$(CFLAGS)
 
 bcmp: bcmp.o bcmpa.o
 	gcc $(LDFLAGS) -o $@ $^
-
+	
 bcmp.o: bcmp.c
 bcmpa.o : bcmpa.asm
 
